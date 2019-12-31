@@ -14,10 +14,14 @@
 
 ![Screenshot](./screenshots/add-new-animal-screen.png)
 
+## User Animals Screen
+
+![Screenshot](./screenshots/user-animals-screen.jpeg)
+
 ## All Animals Screen
 
 ![Screenshot](./screenshots/all-animals-screen.jpeg)
 
-## User Animals Screen
+## Animal Detail Screen
 
-![Screenshot](./screenshots/user-animals-screen.jpeg)
+![Screenshot](./screenshots/animal-detail-screen.jpeg)
