@@ -7,11 +7,20 @@ export const DELETE_ANIMAL = "DELETE_ANIMAL";
 
 import ENV from "../../env";
 
-export const createAnimal = (description, dogType, imageUrl) => {
+export const createAnimal = (description, dogType, imageUrl, location) => {
   return async (dispatch, getState) => {
     // execute any async code you want
     const token = getState().auth.token;
     const userId = getState().auth.userId;
+
+    const locationResponse = await fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.lat},${location.lng}&key=${ENV.googleMapsApiKey}`
+    );
+
+    const locationResData = await locationResponse.json();
+
+    const address = locationResData.results[0].formatted_address;
+
     const res = await fetch(`${ENV.fireBaseUrl}.json?auth=${token}`, {
       method: "POST",
       headers: {
@@ -21,10 +30,12 @@ export const createAnimal = (description, dogType, imageUrl) => {
         description,
         dogType,
         imageUrl,
-        ownerId: userId
+        ownerId: userId,
+        address,
+        lat: location.lat,
+        lng: location.lng
       })
     });
-
     const resData = await res.json();
 
     dispatch({
@@ -34,7 +45,10 @@ export const createAnimal = (description, dogType, imageUrl) => {
         ownerId: userId,
         description,
         dogType,
-        imageUrl
+        imageUrl,
+        address,
+        lat: location.lat,
+        lng: location.lng
       }
     });
   };
@@ -61,7 +75,8 @@ export const fetchAnimals = () => {
             resData[key].ownerId,
             resData[key].description,
             resData[key].dogType,
-            resData[key].imageUrl
+            resData[key].imageUrl,
+            resData[key].address
           )
         );
       }

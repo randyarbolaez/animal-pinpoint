@@ -86,7 +86,7 @@ const AnimalNavigator = createBottomTabNavigator(
     AnimalDetail: {
       screen: AnimalDetailsScreen,
       navigationOptions: {
-        tabBarButtonComponent: ({ tintColor }) => null
+        tabBarButtonComponent: () => null
       }
     }
   },

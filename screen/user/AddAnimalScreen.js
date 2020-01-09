@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { NavigationEvents } from "react-navigation";
 
 import ImagePicker from "../../components/ImagePicker";
+import LocationPicker from "../../components/LocationPicker";
 import * as animalsActions from "../../store/actions/animals-actions";
 import Colors from "../../constants/Colors";
 
@@ -19,6 +20,7 @@ const AddAnimalScreen = props => {
   const [descriptionValue, setDescriptionValue] = useState("");
   const [dogTypeValue, setDogTypeValue] = useState("");
   const [selectedImage, setSelectedImage] = useState();
+  const [selectedLocation, setSelectedLocation] = useState();
   const [pickedImage, setPickedImage] = useState();
 
   const dispatch = useDispatch();
@@ -36,13 +38,23 @@ const AddAnimalScreen = props => {
     setSelectedImage(imagePath);
   };
 
+  const locationPickHandler = useCallback(location => {
+    setSelectedLocation(location);
+  }, []);
+
   const saveAnimalHandler = () => {
     dispatch(
-      animalsActions.createAnimal(descriptionValue, dogTypeValue, selectedImage)
+      animalsActions.createAnimal(
+        descriptionValue,
+        dogTypeValue,
+        selectedImage,
+        selectedLocation
+      )
     );
     setDescriptionValue("");
     setDogTypeValue("");
     setPickedImage(undefined);
+    setSelectedLocation(undefined);
     props.navigation.goBack();
   };
 
@@ -89,6 +101,7 @@ const AddAnimalScreen = props => {
             setPickedImage={setPickedImage}
             pickedImage={pickedImage}
           />
+
           <View
             style={{
               borderWidth: 2.7,
@@ -106,6 +119,10 @@ const AddAnimalScreen = props => {
               onChangeText={descriptionChangeHandler}
               value={descriptionValue}
               multiline
+            />
+            <LocationPicker
+              navigation={props.navigation}
+              onLocationPicked={locationPickHandler}
             />
           </View>
           <Button
@@ -138,7 +155,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#ccc",
     borderBottomWidth: 2,
     marginBottom: 15,
-    paddingVertical: 4
+    paddingVertical: 10
   }
 });
 

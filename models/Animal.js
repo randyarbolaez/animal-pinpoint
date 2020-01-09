@@ -1,13 +1,13 @@
 class Animal {
-  constructor(id, ownerId, description, dogType, imageURL) {
+  constructor(id, ownerId, description, dogType, imageURL, address, lat, lng) {
     this.id = id;
     this.ownerId = ownerId;
     this.description = description;
     this.dogType = dogType;
     this.imageURL = imageURL;
-    // this.address = address;
-    // this.lat = lat;
-    // this.lng = lng;
+    this.address = address;
+    this.lat = lat;
+    this.lng = lng;
   }
 }
 

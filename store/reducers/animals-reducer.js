@@ -18,7 +18,10 @@ export default (state = initialState, action) => {
         action.animalData.ownerId,
         action.animalData.description,
         action.animalData.dogType,
-        action.animalData.imageUrl
+        action.animalData.imageUrl,
+        action.animalData.address,
+        action.animalData.lat,
+        action.animalData.lng
       );
       return {
         ...state,

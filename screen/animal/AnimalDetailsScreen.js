@@ -9,6 +9,7 @@ const AnimalDetailsScreen = props => {
   const animal = useSelector(state =>
     state.animal.availableAnimals.find(animal => animal.id === animalId)
   );
+
   return (
     <View style={styles.container}>
       <Text style={styles.dogType}>{animal.dogType.toUpperCase()}</Text>
@@ -24,6 +25,16 @@ const AnimalDetailsScreen = props => {
           uri: animal.imageURL
         }}
       />
+      <View style={styles.addressContainer}>
+        <Text
+          style={{
+            color: Colors.accentColor,
+            fontSize: 15
+          }}
+        >
+          {animal.address}
+        </Text>
+      </View>
       <View style={styles.descriptionContainer}>
         <ScrollView>
           <Text
@@ -56,10 +67,19 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 30,
+    // marginTop: 30,
     marginHorizontal: 55,
     backgroundColor: Colors.primaryColor,
-    height: "25%",
+    height: "15%",
+    borderRadius: 10,
+    shadowOpacity: 0.26,
+    shadowOffset: { width: 0, height: 2 },
+    paddingHorizontal: 25
+  },
+  addressContainer: {
+    marginVertical: 15,
+    padding: 25,
+    backgroundColor: "#ccc",
     borderRadius: 10,
     shadowOpacity: 0.26,
     shadowOffset: { width: 0, height: 2 }
