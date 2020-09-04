@@ -6,8 +6,8 @@ import * as animalActions from "../../store/actions/animals-actions";
 import CardAnimal from "../../components/CardAnimal";
 import Colors from "../../constants/Colors";
 
-const UserAnimalsScreen = props => {
-  const userAnimals = useSelector(state => state.animal.userAnimals);
+const UserAnimalsScreen = (props) => {
+  const userAnimals = useSelector((state) => state.animal.userAnimals);
   const dispatch = useDispatch();
 
   const loadAnimals = useCallback(async () => {
@@ -18,11 +18,11 @@ const UserAnimalsScreen = props => {
     }
   }, [dispatch]);
 
-  const deleteHandler = id => {
+  const deleteHandler = (id) => {
     Alert.alert("Are you Sure?", "Do you really want to delete this item?", [
       {
         text: "No",
-        style: "default"
+        style: "default",
       },
       {
         text: "Yes",
@@ -30,23 +30,23 @@ const UserAnimalsScreen = props => {
         onPress: () => {
           dispatch(animalActions.deleteAnimal(id));
           loadAnimals();
-        }
-      }
+        },
+      },
     ]);
   };
 
-  const selectItemHandler = id => {
+  const selectItemHandler = (id) => {
     props.navigation.navigate("AnimalDetail", {
-      animalId: id
+      animalId: id,
     });
   };
 
   return (
     <FlatList
       data={userAnimals}
-      keyExtractor={item => item.id}
+      keyExtractor={(item) => item.id}
       numColumns={2}
-      renderItem={itemData => {
+      renderItem={(itemData) => {
         return (
           <CardAnimal
             {...itemData.item}

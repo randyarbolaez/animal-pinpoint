@@ -5,15 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import * as animalActions from "../../store/actions/animals-actions";
 import CardAnimal from "../../components/CardAnimal";
 
-const AllAnimalsScreen = props => {
+const AllAnimalsScreen = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
-  const availableAnimals = useSelector(state => state.animal.availableAnimals);
+  const availableAnimals = useSelector(
+    (state) => state.animal.availableAnimals
+  );
   const dispatch = useDispatch();
 
   const loadAnimals = useCallback(async () => {
-    setIsRefreshing(true);
     try {
       await dispatch(animalActions.fetchAnimals());
     } catch (err) {
@@ -22,9 +23,9 @@ const AllAnimalsScreen = props => {
     setIsRefreshing(false);
   }, [dispatch, setIsRefreshing]);
 
-  const selectItemHandler = id => {
+  const selectItemHandler = (id) => {
     props.navigation.navigate("AnimalDetail", {
-      animalId: id
+      animalId: id,
     });
   };
 
@@ -41,7 +42,7 @@ const AllAnimalsScreen = props => {
     props.navigation.setParams({
       logout: () => {
         dispatch(authActions.logout());
-      }
+      },
     });
     dispatch(animalActions.fetchAnimals()).then(() => {
       setIsLoading(false);
@@ -49,28 +50,30 @@ const AllAnimalsScreen = props => {
   }, [dispatch]);
 
   return (
-    <FlatList
-      onRefresh={loadAnimals}
-      refreshing={isRefreshing}
-      data={availableAnimals}
-      numColumns={2}
-      keyExtractor={item => item.id}
-      renderItem={itemData => {
-        return (
-          <CardAnimal
-            onSelect={() => {
-              selectItemHandler(itemData.item.id);
-            }}
-            {...itemData.item}
-          />
-        );
-      }}
-    />
+    <View style={styles.screen}>
+      <FlatList
+        onRefresh={loadAnimals}
+        refreshing={isRefreshing}
+        data={availableAnimals}
+        numColumns={1}
+        keyExtractor={(item) => item.id}
+        renderItem={(itemData) => {
+          return (
+            <CardAnimal
+              onSelect={() => {
+                selectItemHandler(itemData.item.id);
+              }}
+              {...itemData.item}
+            />
+          );
+        }}
+      />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center" }
+  screen: { flex: 1, paddingTop: 50, backgroundColor: "#a63a50" },
 });
 
 export default AllAnimalsScreen;

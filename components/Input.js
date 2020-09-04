@@ -10,13 +10,13 @@ const inputReducer = (state, action) => {
       return {
         ...state,
         value: action.value,
-        isValid: action.isValid
+        isValid: action.isValid,
       };
       break;
     case INPUT_BLUR:
       return {
         ...state,
-        touched: true
+        touched: true,
       };
     default:
       return state;
@@ -24,11 +24,11 @@ const inputReducer = (state, action) => {
   }
 };
 
-const Input = props => {
+const Input = (props) => {
   const [inputState, dispatch] = useReducer(inputReducer, {
     value: props.initialValue ? props.initialValue : "",
     isValid: props.initiallyValid,
-    touched: false
+    touched: false,
   });
 
   const { onInputChange, id } = props;
@@ -39,7 +39,7 @@ const Input = props => {
     }
   }, [inputState, onInputChange, id]);
 
-  const textChangeHandler = text => {
+  const textChangeHandler = (text) => {
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let isValid = true;
     if (props.required && text.trim().length === 0) {
@@ -64,7 +64,6 @@ const Input = props => {
   const lostFocusHandler = () => {
     dispatch({ type: INPUT_BLUR });
   };
-
   return (
     <View styles={styles.formControl}>
       <Text style={styles.label}>{props.label}</Text>
@@ -86,28 +85,33 @@ const Input = props => {
 
 const styles = StyleSheet.create({
   formControl: {
-    width: "100%"
-  },
-  label: {
-    marginVertical: 8,
-    textAlign: "center"
+    width: "100%",
   },
   input: {
-    paddingHorizontal: 2,
-    paddingVertical: 5,
-    borderBottomColor: "#ccc",
-    borderBottomWidth: 1,
-    borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 10,
-    textAlign: "center"
+    paddingHorizontal: 8,
+    paddingVertical: 10,
+    backgroundColor: "#f8f4e3",
+    borderBottomColor: "transparent",
+    borderTopColor: "transparent",
+    borderWidth: 5,
+    borderEndColor: "#a63a50",
+    borderStartColor: "#a63a50",
+    borderTopStartRadius: 50,
+    borderBottomStartRadius: 50,
+    borderTopEndRadius: 50,
+    borderBottomEndRadius: 50,
+    fontSize: 20,
+    textAlign: "center",
+    color: "#a63a50",
   },
   errorContainer: {
-    marginVertical: 5
+    marginVertical: 3,
   },
   errorText: {
-    color: "#FFF9F5",
-    fontSize: 15
-  }
+    textAlign: "center",
+    color: "#f7dad9",
+    fontSize: 14,
+  },
 });
 
 export default Input;

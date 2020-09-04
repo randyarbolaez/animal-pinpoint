@@ -7,7 +7,7 @@ import {
   Button,
   StyleSheet,
   ActivityIndicator,
-  Alert
+  Alert,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useDispatch } from "react-redux";
@@ -23,11 +23,11 @@ const formReducer = (state, action) => {
   if (action.type === FORM_INPUT_UPDATE) {
     const updatedValues = {
       ...state.inputValues,
-      [action.input]: action.value
+      [action.input]: action.value,
     };
     const updatedValidities = {
       ...state.inputValidities,
-      [action.input]: action.isValid
+      [action.input]: action.isValid,
     };
     let updatedFormIsValid = true;
     for (const key in updatedValidities) {
@@ -36,13 +36,13 @@ const formReducer = (state, action) => {
     return {
       formIsValid: updatedFormIsValid,
       inputValidities: updatedValidities,
-      inputValues: updatedValues
+      inputValues: updatedValues,
     };
   }
   return state;
 };
 
-const AuthScreen = props => {
+const AuthScreen = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
   const [isSignup, setIsSignup] = useState(false);
@@ -52,13 +52,13 @@ const AuthScreen = props => {
   const [formState, dispatchFormState] = useReducer(formReducer, {
     inputValues: {
       email: "",
-      password: ""
+      password: "",
     },
     inputValidities: {
       email: false,
-      password: false
+      password: false,
     },
-    formIsValid: false
+    formIsValid: false,
   });
 
   useEffect(() => {
@@ -97,84 +97,87 @@ const AuthScreen = props => {
         type: FORM_INPUT_UPDATE,
         value: inputValue,
         isValid: inputValidity,
-        input: inputIdentifier
+        input: inputIdentifier,
       });
     },
     [dispatchFormState]
   );
 
   return (
-    <KeyboardAvoidingView
-      behavior="padding"
-      keyboardVerticalOffset={5}
-      style={styles.screen}
-    >
-      <LinearGradient colors={["#FEC8D8", "#D291BC"]} style={styles.gradient}>
-        <View style={styles.container}>
-          <ScrollView>
-            <Input
-              color={Colors.accentColor}
-              id="email"
-              label="E-Mail"
-              keyboardType="email-address"
-              required
-              email
-              autoCapitalize="none"
-              errorText="Please enter a valid email address."
-              onInputChange={inputChangeHandler}
-              initialValue=""
-            />
-            <Input
-              color={Colors.accentColor}
-              id="password"
-              label="Password"
-              keyboardType="default"
-              secureTextEntry
-              required
-              minLength={6}
-              autoCapitalize="none"
-              errorText="Please enter a valid password."
-              onInputChange={inputChangeHandler}
-              initialValue=""
-            />
-            <View style={styles.buttonContainer}>
-              {isLoading ? (
-                <ActivityIndicator size="small" color={Colors.primary} />
-              ) : (
-                <Button
-                  title={isSignup ? "Sign Up" : "Login"}
-                  color={Colors.accentColor}
-                  onPress={authHandler}
-                />
-              )}
-            </View>
-            <View style={styles.buttonContainer}>
+    <KeyboardAvoidingView behavior="padding" style={styles.screen}>
+      <View style={styles.titleContainer}>
+        <Text style={styles.titleText}>A</Text>
+        <Text style={styles.titleText}>nimal</Text>
+        <Text style={styles.titleText}>P</Text>
+        <Text style={styles.titleText}>in</Text>
+        <Text style={styles.titleText}>P</Text>
+        <Text style={styles.titleText}>oint</Text>
+      </View>
+      <View style={styles.container}>
+        <Input
+          placeholder="E-Mail"
+          id="email"
+          keyboardType="email-address"
+          required
+          email
+          autoCapitalize="none"
+          errorText="Please enter a valid email address."
+          onInputChange={inputChangeHandler}
+          initialValue=""
+        />
+        <Input
+          placeholder="Password"
+          id="password"
+          keyboardType="default"
+          secureTextEntry
+          required
+          password
+          minLength={6}
+          autoCapitalize="none"
+          errorText="Please enter a valid password."
+          onInputChange={inputChangeHandler}
+          initialValue=""
+          returnKeyType="done"
+          onSubmitEditing={() => {
+            authHandler();
+          }}
+        />
+        <View style={styles.buttonContainer}>
+          <View style={styles.individualButton}>
+            {isLoading ? (
+              <ActivityIndicator size="small" color={Colors.primary} />
+            ) : (
               <Button
-                title={`Switch to ${isSignup ? "Login" : "Sign Up"}`}
-                color={Colors.accentColor}
-                onPress={() => {
-                  props.navigation.setParams({
-                    isSignUpHeaderTitle: !isSignup
-                  });
-                  setIsSignup(prevState => !prevState);
-                }}
+                title={isSignup ? "Sign Up" : "Login"}
+                color={"#e4b1ab"}
+                onPress={authHandler}
               />
-            </View>
-          </ScrollView>
+            )}
+          </View>
+          <View>
+            <Button
+              title={`* Switch to ${isSignup ? "Login" : "Sign Up"}`}
+              color={"#F2EBFF"}
+              onPress={() => {
+                props.navigation.setParams({
+                  isSignUpHeaderTitle: !isSignup,
+                });
+                setIsSignup((prevState) => !prevState);
+              }}
+            />
+          </View>
         </View>
-      </LinearGradient>
+      </View>
     </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1
-  },
-  gradient: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: "#a63a50",
   },
   container: {
     width: "80%",
@@ -182,22 +185,53 @@ const styles = StyleSheet.create({
     maxHeight: 400,
     padding: 20,
     borderRadius: 10,
-    backgroundColor: "transparent",
-    shadowRadius: 8,
-    shadowColor: "#CCCCCC",
-    shadowOpacity: 0.26,
-    shadowOffset: { width: 0, height: 2 }
+  },
+  titleContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "baseline",
+
+    borderColor: "transparent",
+    borderLeftColor: "#f8f4e3",
+    borderRightColor: "#f8f4e3",
+    borderWidth: 20,
+    borderTopRightRadius: 50,
+    borderBottomRightRadius: 50,
+    borderTopLeftRadius: 50,
+    borderBottomLeftRadius: 50,
+    // paddingHorizontal: 0,
+    marginVertical: 20,
+  },
+  titleText: {
+    fontStyle: "italic",
+    fontSize: 42,
+    color: "#a63a50",
+    fontWeight: "bold",
+    backgroundColor: "#f8f4e3",
+    paddingVertical: 8,
   },
   buttonContainer: {
-    marginTop: 10
-  }
+    display: "flex",
+    // flexDirection: "row",
+    marginTop: 10,
+    justifyContent: "center",
+  },
+  individualButton: {
+    paddingHorizontal: 10,
+    borderTopRightRadius: 100,
+    borderBottomLeftRadius: 100,
+    borderColor: "transparent",
+    borderBottomColor: "#f8f4e3",
+    borderTopColor: "#f8f4e3",
+    borderWidth: 5,
+    // backgroundColor: "#f1faee",
+  },
 });
 
-AuthScreen.navigationOptions = navData => {
-  let isSignUpHeaderTitle =
-    navData.navigation.getParam("isSignUpHeaderTitle") || false;
+AuthScreen.navigationOptions = (navData) => {
   return {
-    headerTitle: isSignUpHeaderTitle ? "Sign Up" : "Login"
+    headerShown: false,
   };
 };
 

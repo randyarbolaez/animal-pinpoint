@@ -5,14 +5,14 @@ import {
   Text,
   ActivityIndicator,
   Alert,
-  StyleSheet
+  StyleSheet,
 } from "react-native";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 
 import Colors from "../constants/Colors";
 
-const LocationPicker = props => {
+const LocationPicker = (props) => {
   const [pickedLocation, setPickedLocation] = useState();
 
   const mapPickedLocation = props.navigation.getParam("pickedLocation");
@@ -47,15 +47,15 @@ const LocationPicker = props => {
     }
     try {
       const location = await Location.getCurrentPositionAsync({
-        timeout: 5000
+        timeout: 5000,
       });
       setPickedLocation({
         lat: location.coords.latitude,
-        lng: location.coords.longitude
+        lng: location.coords.longitude,
       });
       props.onLocationPicked({
         lat: location.coords.latitude,
-        lng: location.coords.longitude
+        lng: location.coords.longitude,
       });
     } catch (err) {
       Alert.alert(
@@ -70,8 +70,8 @@ const LocationPicker = props => {
     <View style={styles.locationPicker}>
       <View style={styles.actions}>
         <Button
-          title="Dog's Location"
-          color={Colors.primaryColor}
+          title="Animal's Location"
+          color={"#f8f4e3"}
           onPress={getLocationHandler}
         />
       </View>
@@ -81,20 +81,28 @@ const LocationPicker = props => {
 
 const styles = StyleSheet.create({
   locationPicker: {
-    marginBottom: 15
+    marginBottom: 15,
   },
   mapPreview: {
     marginBottom: 10,
     width: "100%",
     height: 150,
     borderColor: "#ccc",
-    borderWidth: 1
+    borderWidth: 1,
   },
   actions: {
     flexDirection: "row",
     justifyContent: "space-around",
-    width: "100%"
-  }
+    width: "100%",
+    paddingHorizontal: 10,
+    borderTopRightRadius: 100,
+    borderBottomLeftRadius: 100,
+    borderColor: "transparent",
+    borderBottomColor: "#f8f4e3",
+    borderTopColor: "#f8f4e3",
+    borderWidth: 5,
+    // backgroundColor:'yellow'
+  },
 });
 
 export default LocationPicker;
