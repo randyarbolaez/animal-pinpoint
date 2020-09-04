@@ -8,20 +8,12 @@
 
 ## Login/Sign Up Screen
 
-![Screenshot](./screenshots/login-signup-screen.png)
+![Screenshot](./screenshots/login-signup-screen.jpeg)
 
 ## Add New Animal Screen
 
-![Screenshot](./screenshots/add-new-animal-screen.png)
-
-## User Animals Screen
-
-![Screenshot](./screenshots/user-animals-screen.jpeg)
+![Screenshot](./screenshots/add-new-animal-screen.jpeg)
 
 ## All Animals Screen
 
 ![Screenshot](./screenshots/all-animals-screen.jpeg)
-
-## Animal Detail Screen
-
-![Screenshot](./screenshots/animal-detail-screen.jpeg)
