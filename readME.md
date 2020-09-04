@@ -10,10 +10,10 @@
 
 ![Screenshot](./screenshots/login-signup-screen.jpeg)
 
-## Add New Animal Screen
-
-![Screenshot](./screenshots/add-new-animal-screen.jpeg)
-
 ## All Animals Screen
 
 ![Screenshot](./screenshots/all-animals-screen.jpeg)
+
+## Add New Animal Screen
+
+![Screenshot](./screenshots/add-new-animal-screen.jpeg)
