@@ -16,7 +16,7 @@ const ImgPicker = (props) => {
     if (result.status !== "granted") {
       Alert.alert(
         "Insufficient Permissions",
-        "You need to give access to camera to use this app!",
+        "Settings > Expo > Photos > All Photos",
         [{ text: "Okay" }]
       );
       return false;

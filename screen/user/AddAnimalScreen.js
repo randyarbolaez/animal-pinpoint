@@ -106,13 +106,15 @@ const AddAnimalScreen = (props) => {
               onLocationPicked={locationPickHandler}
             />
           </View>
-          <View style={styles.buttonContainer}>
-            <Button
-              title="Add Animal"
-              color={"#f8f4e3"}
-              onPress={saveAnimalHandler}
-            />
-          </View>
+          {selectedLocation && (
+            <View style={styles.buttonContainer}>
+              <Button
+                title="Add Animal"
+                color={"#f8f4e3"}
+                onPress={saveAnimalHandler}
+              />
+            </View>
+          )}
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
