@@ -106,12 +106,7 @@ const AuthScreen = (props) => {
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.screen}>
       <View style={styles.titleContainer}>
-        <Text style={styles.titleText}>A</Text>
-        <Text style={styles.titleText}>nimal</Text>
-        <Text style={styles.titleText}>P</Text>
-        <Text style={styles.titleText}>in</Text>
-        <Text style={styles.titleText}>P</Text>
-        <Text style={styles.titleText}>oint</Text>
+        <Text>AnimalPinPoint</Text>
       </View>
       <View style={styles.container}>
         <Input
@@ -177,39 +172,25 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#a63a50",
+    backgroundColor:"#9e1318",
   },
   container: {
-    width: "80%",
-    maxWidth: 400,
-    maxHeight: 400,
-    padding: 20,
-    borderRadius: 10,
+    width: "100%",
+    height:"65%",
+    backgroundColor: "white",
+    borderRadius: 40,
   },
   titleContainer: {
     display: "flex",
-    flexDirection: "row",
     justifyContent: "center",
-    alignItems: "baseline",
-
-    borderColor: "transparent",
-    borderLeftColor: "#f8f4e3",
-    borderRightColor: "#f8f4e3",
-    borderWidth: 20,
-    borderTopRightRadius: 50,
-    borderBottomRightRadius: 50,
-    borderTopLeftRadius: 50,
-    borderBottomLeftRadius: 50,
-    // paddingHorizontal: 0,
-    marginVertical: 20,
+    height:"35%",
   },
   titleText: {
     fontStyle: "italic",
-    fontSize: 42,
+    fontSize: 142,
     color: "#a63a50",
     fontWeight: "bold",
     backgroundColor: "#f8f4e3",
-    paddingVertical: 8,
   },
   buttonContainer: {
     display: "flex",
