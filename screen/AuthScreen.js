@@ -3,6 +3,7 @@ import {
   ScrollView,
   View,
   Text,
+  Image,
   KeyboardAvoidingView,
   Button,
   StyleSheet,
@@ -106,7 +107,7 @@ const AuthScreen = (props) => {
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.screen}>
       <View style={styles.titleContainer}>
-        <Text>AnimalPinPoint</Text>
+        <Image style={styles.titleImage} source={require("../assets/splash.png")}/>
       </View>
       <View style={styles.container}>
         <Input
@@ -173,28 +174,29 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor:"#9e1318",
+    //backgroundColor:"#f3dfd7",
   },
   container: {
     width: "100%",
-    height:"65%",
+    height:"70%",
     backgroundColor: "white",
+    backgroundColor:"#9e1318",
+    backgroundColor:"#f3dfd7",
     borderRadius: 40,
   },
   titleContainer: {
     display: "flex",
     justifyContent: "center",
-    height:"35%",
+    height:"30%",
+    width:"100%"
   },
-  titleText: {
-    fontStyle: "italic",
-    fontSize: 142,
-    color: "#a63a50",
-    fontWeight: "bold",
-    backgroundColor: "#f8f4e3",
+  titleImage: {
+    width:110,
+    height:130,
+    marginBottom:50,
   },
   buttonContainer: {
     display: "flex",
-    // flexDirection: "row",
     marginTop: 10,
     justifyContent: "center",
   },
