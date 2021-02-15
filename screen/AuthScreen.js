@@ -9,6 +9,8 @@ import {
   StyleSheet,
   ActivityIndicator,
   Alert,
+  TouchableWithoutFeedback,
+  Keyboard
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useDispatch } from "react-redux";
@@ -46,7 +48,7 @@ const formReducer = (state, action) => {
 const AuthScreen = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
-  const [isSignup, setIsSignup] = useState(false);
+  const [isSignup, setIsSignup] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -106,10 +108,13 @@ const AuthScreen = (props) => {
 
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.screen}>
-      <View style={styles.titleContainer}>
-        <Image style={styles.titleImage} source={require("../assets/splash.png")}/>
-      </View>
-      <View style={styles.container}>
+      <TouchableWithoutFeedback onPress={() => {
+        Keyboard.dismiss()
+        setIsSignup(null)
+      }}>
+    <View style={{flex:1}}>
+    {(isSignup !== true || isSignup == null) && (
+      <View style={{...styles.container,...styles.signInContainer,height:isSignup == null ? "28%" : "45%"}}>
         <Input
           placeholder="E-Mail"
           id="email"
@@ -120,6 +125,9 @@ const AuthScreen = (props) => {
           errorText="Please enter a valid email address."
           onInputChange={inputChangeHandler}
           initialValue=""
+          onFocus={() => {
+            setIsSignup(false);
+          }}
         />
         <Input
           placeholder="Password"
@@ -135,7 +143,11 @@ const AuthScreen = (props) => {
           initialValue=""
           returnKeyType="done"
           onSubmitEditing={() => {
+            setIsSignup(false);
             authHandler();
+          }}
+          onFocus={() => {
+            setIsSignup(false);
           }}
         />
         <View style={styles.buttonContainer}>
@@ -144,26 +156,75 @@ const AuthScreen = (props) => {
               <ActivityIndicator size="small" color={Colors.primary} />
             ) : (
               <Button
-                title={isSignup ? "Sign Up" : "Login"}
+                title={"Login"}
                 color={"#e4b1ab"}
-                onPress={authHandler}
+                onPress={() => {
+                  setIsSignup(false);
+                  authHandler();
+                }}
               />
             )}
           </View>
-          <View>
-            <Button
-              title={`* Switch to ${isSignup ? "Login" : "Sign Up"}`}
-              color={"#F2EBFF"}
-              onPress={() => {
-                props.navigation.setParams({
-                  isSignUpHeaderTitle: !isSignup,
-                });
-                setIsSignup((prevState) => !prevState);
-              }}
-            />
+        </View>
+      </View>
+      )}
+      {(isSignup !== false|| isSignup == null) && (
+      <View style={{...styles.container,...styles.signUpContainer,height:isSignup == null ? "28%" : "45%"}}>
+        <Input
+          placeholder="E-Mail"
+          id="email"
+          keyboardType="email-address"
+          required
+          email
+          autoCapitalize="none"
+          errorText="Please enter a valid email address."
+          onInputChange={inputChangeHandler}
+          initialValue=""
+          onFocus={() => {
+            setIsSignup(true);
+          }}
+        />
+        <Input
+          placeholder="Password"
+          id="password"
+          keyboardType="default"
+          secureTextEntry
+          required
+          password
+          minLength={6}
+          autoCapitalize="none"
+          errorText="Please enter a valid password."
+          onInputChange={inputChangeHandler}
+          initialValue=""
+          returnKeyType="done"
+          onSubmitEditing={() => {
+            setIsSignup(true);
+            authHandler();
+          }}
+          onFocus={() => {
+            setIsSignup(true);
+          }}
+        />
+        <View style={styles.buttonContainer}>
+          <View style={styles.individualButton}>
+            {isLoading ? (
+              <ActivityIndicator size="small" color={Colors.primary} />
+            ) : (
+              <Button
+                title={"Sign Up"}
+                color={"#e4b1ab"}
+                onPress={() => {
+                  setIsSignup(true);
+                  authHandler();
+                }}
+              />
+            )}
           </View>
         </View>
       </View>
+      )}
+    </View>
+      </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
 };
@@ -172,28 +233,29 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     justifyContent: "center",
+    justifyContent: "space-around",
+    flexDirection:"row",
     alignItems: "center",
     backgroundColor:"#9e1318",
     //backgroundColor:"#f3dfd7",
+    backgroundColor:"#0d98ba",
+    backgroundColor:"#95d8eb",
   },
   container: {
-    width: "100%",
-    height:"70%",
-    backgroundColor: "white",
-    backgroundColor:"#9e1318",
-    backgroundColor:"#f3dfd7",
+    width: "70%",
+    height:"40%",
+    backgroundColor:"#0fabd2",
     borderRadius: 40,
   },
-  titleContainer: {
-    display: "flex",
-    justifyContent: "center",
-    height:"30%",
-    width:"100%"
-  },
-  titleImage: {
-    width:110,
-    height:130,
+  signInContainer:{
+    alignSelf:"center",
+    alignItems:"flex-end",
     marginBottom:50,
+    marginRight:"35%",
+  },
+  signUpContainer:{
+    alignItems:"flex-start",
+    alignSelf:"flex-end",
   },
   buttonContainer: {
     display: "flex",
@@ -208,7 +270,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#f8f4e3",
     borderTopColor: "#f8f4e3",
     borderWidth: 5,
-    // backgroundColor: "#f1faee",
+    backgroundColor: "#f1faee",
   },
 });
 
