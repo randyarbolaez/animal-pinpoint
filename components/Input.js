@@ -65,20 +65,17 @@ const Input = (props) => {
     dispatch({ type: INPUT_BLUR });
   };
   return (
-    <View styles={styles.formControl}>
+    <View styles={{...styles.formControl,backgroundColor: props.errorText == true ? 'purple':'red' }}>
       <Text style={styles.label}>{props.label}</Text>
       <TextInput
         {...props}
-        style={styles.input}
+        style={{...styles.input, 
+            borderBottomColor: !inputState.isValid && inputState.touched ? 'rgba(158, 19, 24,1)':'#00008b',
+        }}
         value={inputState.value}
         onChangeText={textChangeHandler}
         onBlur={lostFocusHandler}
       />
-      {!inputState.isValid && inputState.touched && (
-        <View style={styles.errorContainer}>
-          <Text style={styles.errorText}>{props.errorText}</Text>
-        </View>
-      )}
     </View>
   );
 };
@@ -88,29 +85,14 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   input: {
+    marginHorizontal:"3%",
     paddingHorizontal: 8,
     paddingVertical: 10,
-    backgroundColor: "#f8f4e3",
-    borderBottomColor: "transparent",
-    borderTopColor: "transparent",
+    borderColor: "transparent",
     borderWidth: 5,
-    borderEndColor: "#a63a50",
-    borderStartColor: "#a63a50",
-    borderTopStartRadius: 50,
-    borderBottomStartRadius: 50,
-    borderTopEndRadius: 50,
-    borderBottomEndRadius: 50,
     fontSize: 20,
     textAlign: "center",
-    color: "#a63a50",
-  },
-  errorContainer: {
-    marginVertical: 3,
-  },
-  errorText: {
-    textAlign: "center",
-    color: "#f7dad9",
-    fontSize: 14,
+    color:'white',
   },
 });
 

@@ -114,7 +114,7 @@ const AuthScreen = (props) => {
       }}>
     <View style={{flex:1}}>
     {(isSignup !== true || isSignup == null) && (
-      <View style={{...styles.container,...styles.signInContainer,height:isSignup == null ? "28%" : "45%"}}>
+      <View style={{...styles.container,...styles.signInContainer,height:isSignup == null ? "30%" : "45%"}}>
         <Input
           placeholder="E-Mail"
           id="email"
@@ -151,13 +151,18 @@ const AuthScreen = (props) => {
           }}
         />
         <View style={styles.buttonContainer}>
-          <View style={styles.individualButton}>
+          <View style={{
+            ...styles.individualButton,
+            borderTopLeftRadius:10,
+            borderBottomLeftRadius:10,
+          }}>
             {isLoading ? (
               <ActivityIndicator size="small" color={Colors.primary} />
             ) : (
               <Button
-                title={"Login"}
-                color={"#e4b1ab"}
+                title={"Sign In"}
+                disabled={isSignup !== false|| isSignup == null}
+                color={"#00008b"}
                 onPress={() => {
                   setIsSignup(false);
                   authHandler();
@@ -169,7 +174,7 @@ const AuthScreen = (props) => {
       </View>
       )}
       {(isSignup !== false|| isSignup == null) && (
-      <View style={{...styles.container,...styles.signUpContainer,height:isSignup == null ? "28%" : "45%"}}>
+      <View style={{...styles.container,...styles.signUpContainer,height:isSignup == null ? "30%" : "45%"}}>
         <Input
           placeholder="E-Mail"
           id="email"
@@ -177,7 +182,6 @@ const AuthScreen = (props) => {
           required
           email
           autoCapitalize="none"
-          errorText="Please enter a valid email address."
           onInputChange={inputChangeHandler}
           initialValue=""
           onFocus={() => {
@@ -193,7 +197,6 @@ const AuthScreen = (props) => {
           password
           minLength={6}
           autoCapitalize="none"
-          errorText="Please enter a valid password."
           onInputChange={inputChangeHandler}
           initialValue=""
           returnKeyType="done"
@@ -206,13 +209,18 @@ const AuthScreen = (props) => {
           }}
         />
         <View style={styles.buttonContainer}>
-          <View style={styles.individualButton}>
+          <View style={{
+            ...styles.individualButton,
+            borderTopRightRadius:10,
+            borderBottomRightRadius:10,
+          }}>
             {isLoading ? (
               <ActivityIndicator size="small" color={Colors.primary} />
             ) : (
               <Button
                 title={"Sign Up"}
-                color={"#e4b1ab"}
+                disabled={isSignup !== true|| isSignup == null}
+                color={"#00008b"}
                 onPress={() => {
                   setIsSignup(true);
                   authHandler();
@@ -236,41 +244,41 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     flexDirection:"row",
     alignItems: "center",
-    backgroundColor:"#9e1318",
-    //backgroundColor:"#f3dfd7",
-    backgroundColor:"#0d98ba",
     backgroundColor:"#95d8eb",
   },
   container: {
-    width: "70%",
+    width:"100%",
     height:"40%",
     backgroundColor:"#0fabd2",
     borderRadius: 40,
   },
+  title:{
+    color:"red",
+    textAlign:"center",
+    width:"100%",
+    fontSize:24,
+    backgroundColor:"green",
+  },
   signInContainer:{
     alignSelf:"center",
     alignItems:"flex-end",
-    marginBottom:50,
-    marginRight:"35%",
+    marginBottom:"20%",
+    marginRight:"55%",
   },
   signUpContainer:{
     alignItems:"flex-start",
-    alignSelf:"flex-end",
+    alignSelf:"center",
+    marginLeft:"30%",
   },
   buttonContainer: {
-    display: "flex",
-    marginTop: 10,
-    justifyContent: "center",
+    marginTop: 20,
+    width:"40%",
   },
   individualButton: {
     paddingHorizontal: 10,
-    borderTopRightRadius: 100,
-    borderBottomLeftRadius: 100,
     borderColor: "transparent",
-    borderBottomColor: "#f8f4e3",
-    borderTopColor: "#f8f4e3",
     borderWidth: 5,
-    backgroundColor: "#f1faee",
+    backgroundColor: "#f5f5f5",
   },
 });
 
