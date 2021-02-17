@@ -162,7 +162,7 @@ const AuthScreen = (props) => {
               <Button
                 title={"Sign In"}
                 disabled={isSignup !== false|| isSignup == null}
-                color={"#00008b"}
+                color={"#4682b4"}
                 onPress={() => {
                   setIsSignup(false);
                   authHandler();
@@ -220,7 +220,7 @@ const AuthScreen = (props) => {
               <Button
                 title={"Sign Up"}
                 disabled={isSignup !== true|| isSignup == null}
-                color={"#00008b"}
+                color={"#4682b4"}
                 onPress={() => {
                   setIsSignup(true);
                   authHandler();

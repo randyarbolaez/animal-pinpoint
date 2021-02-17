@@ -70,7 +70,8 @@ const Input = (props) => {
       <TextInput
         {...props}
         style={{...styles.input, 
-            borderBottomColor: !inputState.isValid && inputState.touched ? 'rgba(158, 19, 24,1)':'#00008b',
+            borderBottomColor: !inputState.isValid && inputState.touched ? 'rgba(158, 19, 24,1)':'#4682b4',
+            //borderBottomColor: !inputState.isValid && inputState.touched ? 'rgba(158, 19, 24,1)':'#00008b',
         }}
         value={inputState.value}
         onChangeText={textChangeHandler}
