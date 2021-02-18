@@ -83,9 +83,10 @@ const AnimalNavigator = createBottomTabNavigator(
       style: {
         height: 40,
         paddingTop: 10,
-        backgroundColor: "#a63a50",
+        backgroundColor: "#95d8eb",
+        borderTopWidth:0
       },
-      activeTintColor: Platform.OS === "android" ? "white" : "#EE7674",
+      activeTintColor: Platform.OS === "android" ? "white" : "#4682b4",
       activeBackgroundColor:
         Platform.OS === "android" ? Colors.primaryColor : "",
       showLabel: false,

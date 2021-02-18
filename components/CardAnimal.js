@@ -86,18 +86,19 @@ const CardAnimal = (props) => {
 
 const styles = StyleSheet.create({
   screen: {
-    backgroundColor: "#a63a50",
-    borderBottomColor: "#f8f4e3",
-    borderBottomWidth: 0.3,
+    backgroundColor: "#95d8eb",
+    borderColor:"transparent",
+    borderBottomColor: "#4682b4",
+    borderBottomWidth: 1,
+    borderRadius:10,
+    marginHorizontal:"10%",
   },
   container: {
-    // marginTop: 5,
     alignItems: "center",
     maxHeight: 110,
     paddingVertical: 10,
     borderRadius: 10,
     borderColor: "transparent",
-    // marginTop: "-2%",
   },
   title: {
     fontSize: 16,

@@ -73,7 +73,12 @@ const AllAnimalsScreen = (props) => {
 };
 
 const styles = StyleSheet.create({
-  screen: { flex: 1, paddingTop: 50, backgroundColor: "#a63a50" },
+  screen: { 
+    flex: 1, 
+    paddingTop: 50, 
+    //backgroundColor: "#a63a50",
+    backgroundColor: "#95d8eb",
+  },
 });
 
 export default AllAnimalsScreen;
