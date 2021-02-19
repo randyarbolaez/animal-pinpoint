@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { NavigationEvents } from "react-navigation";
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 import ImagePicker from "../../components/ImagePicker";
 import LocationPicker from "../../components/LocationPicker";
@@ -59,65 +60,74 @@ const AddAnimalScreen = (props) => {
     props.navigation.goBack();
   };
 
+  const onSwipeRight = (state) => {
+    console.log('hello')
+    props.navigation.navigate('AllAnimals');
+  }
+
   return (
-    <KeyboardAvoidingView
-      behavior="padding"
-      keyboardVerticalOffset={25}
-      // KeyboardAvoidingView={10}
+    <GestureRecognizer
       style={styles.screen}
+      onSwipeRight={(state) => onSwipeRight(state)}
     >
-      <ScrollView>
-        <View style={styles.container}>
-          <View>
+      <KeyboardAvoidingView
+        behavior="padding"
+        keyboardVerticalOffset={25}
+        // KeyboardAvoidingView={10}
+      >
+        <ScrollView>
+          <View style={styles.container}>
+            <View>
+              <View>
+                <TextInput
+                  style={{ ...styles.textInput }}
+                  onChangeText={dogTypeValueChangeHandler}
+                  value={dogTypeValue}
+                  placeholder="Provide Breed"
+                  maxLength={20}
+                  placeholderTextColor="#a63a50"
+                />
+              </View>
+            </View>
+            <ImagePicker
+              onImageTaken={imageTakenHandler}
+              setPickedImage={setPickedImage}
+              pickedImage={pickedImage}
+            />
+
             <View>
               <TextInput
-                style={{ ...styles.textInput }}
-                onChangeText={dogTypeValueChangeHandler}
-                value={dogTypeValue}
-                placeholder="Provide Breed"
-                maxLength={20}
+                style={{
+                  ...styles.textInput,
+                  paddingHorizontal: 5,
+                }}
+                onChangeText={descriptionChangeHandler}
+                value={descriptionValue}
+                multiline
+                maxLength={150}
+                placeholder="Provide Description"
                 placeholderTextColor="#a63a50"
+                returnKeyType="done"
+                blurOnSubmit
+              />
+              <LocationPicker
+                navigation={props.navigation}
+                onLocationPicked={locationPickHandler}
               />
             </View>
+            {selectedLocation && (
+              <View style={styles.buttonContainer}>
+                <Button
+                  title="Add Animal"
+                  color={"#f8f4e3"}
+                  onPress={saveAnimalHandler}
+                />
+              </View>
+            )}
           </View>
-          <ImagePicker
-            onImageTaken={imageTakenHandler}
-            setPickedImage={setPickedImage}
-            pickedImage={pickedImage}
-          />
-
-          <View>
-            <TextInput
-              style={{
-                ...styles.textInput,
-                paddingHorizontal: 5,
-              }}
-              onChangeText={descriptionChangeHandler}
-              value={descriptionValue}
-              multiline
-              maxLength={150}
-              placeholder="Provide Description"
-              placeholderTextColor="#a63a50"
-              returnKeyType="done"
-              blurOnSubmit
-            />
-            <LocationPicker
-              navigation={props.navigation}
-              onLocationPicked={locationPickHandler}
-            />
-          </View>
-          {selectedLocation && (
-            <View style={styles.buttonContainer}>
-              <Button
-                title="Add Animal"
-                color={"#f8f4e3"}
-                onPress={saveAnimalHandler}
-              />
-            </View>
-          )}
-        </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </GestureRecognizer>
   );
 };
 

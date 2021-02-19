@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { FlatList, View, Text, StyleSheet, Button } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 import * as animalActions from "../../store/actions/animals-actions";
 import CardAnimal from "../../components/CardAnimal";
@@ -49,8 +50,15 @@ const AllAnimalsScreen = (props) => {
     });
   }, [dispatch]);
 
+  const onSwipeLeft = (state) => {
+    props.navigation.navigate('AddAnimals');
+  }
+
   return (
-    <View style={styles.screen}>
+    <GestureRecognizer
+      onSwipeLeft={(state) => onSwipeLeft(state)}
+      style={styles.screen}
+    >
       <FlatList
         onRefresh={loadAnimals}
         refreshing={isRefreshing}
@@ -68,7 +76,7 @@ const AllAnimalsScreen = (props) => {
           );
         }}
       />
-    </View>
+    </GestureRecognizer>
   );
 };
 
