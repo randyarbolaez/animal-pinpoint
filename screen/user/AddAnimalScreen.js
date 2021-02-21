@@ -135,6 +135,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     backgroundColor: "#a63a50",
+    backgroundColor: "#95d8eb",
   },
   container: {
     display: "flex",
