@@ -55,10 +55,7 @@ const AllAnimalsScreen = (props) => {
   }
 
   return (
-    <GestureRecognizer
-      onSwipeLeft={(state) => onSwipeLeft(state)}
-      style={styles.screen}
-    >
+    <View style={styles.screen}>
       <FlatList
         onRefresh={loadAnimals}
         refreshing={isRefreshing}
@@ -76,7 +73,7 @@ const AllAnimalsScreen = (props) => {
           );
         }}
       />
-    </GestureRecognizer>
+    </View>
   );
 };
 

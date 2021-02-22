@@ -14,16 +14,21 @@ import Colors from "../constants/Colors";
 
 const LocationPicker = (props) => {
   const [pickedLocation, setPickedLocation] = useState();
+  const [clickedButton, setClickedButton] = useState(false);
 
   const mapPickedLocation = props.navigation.getParam("pickedLocation");
 
   const { onLocationPicked } = props;
 
   useEffect(() => {
+    if(props.clickedSubmit){
+      setClickedButton(false);
+      setPickedLocation(false);
+    }
     if (mapPickedLocation) {
       onLocationPicked(mapPickedLocation);
     }
-  }, [mapPickedLocation, onLocationPicked]);
+  }, [props.clickedSubmit,mapPickedLocation, onLocationPicked]);
 
   const verifyPermissions = async () => {
     const result = await Permissions.askAsync(Permissions.LOCATION);
@@ -40,6 +45,7 @@ const LocationPicker = (props) => {
   };
 
   const getLocationHandler = async () => {
+    setClickedButton(true)
     const hasPermission = await verifyPermissions();
 
     if (!hasPermission) {
@@ -69,11 +75,17 @@ const LocationPicker = (props) => {
   return (
     <View style={styles.locationPicker}>
       <View style={styles.actions}>
-        <Button
-          title="Animal's Location"
-          color={"#f8f4e3"}
-          onPress={getLocationHandler}
-        />
+        {!clickedButton ? (
+          <Button
+            title="Animal's Location"
+            color={"#f8f4e3"}
+            onPress={getLocationHandler}
+          />
+        ):pickedLocation ? null:(
+          <ActivityIndicator size="large" />
+        )
+        }
+        
       </View>
     </View>
   );
@@ -81,27 +93,11 @@ const LocationPicker = (props) => {
 
 const styles = StyleSheet.create({
   locationPicker: {
-    marginBottom: 15,
-  },
-  mapPreview: {
-    marginBottom: 10,
-    width: "100%",
-    height: 150,
-    borderColor: "#ccc",
-    borderWidth: 1,
+    marginVertical: 10,
   },
   actions: {
-    flexDirection: "row",
-    justifyContent: "space-around",
     width: "100%",
     paddingHorizontal: 10,
-    borderTopRightRadius: 100,
-    borderBottomLeftRadius: 100,
-    borderColor: "transparent",
-    borderBottomColor: "#f8f4e3",
-    borderTopColor: "#f8f4e3",
-    borderWidth: 5,
-    // backgroundColor:'yellow'
   },
 });
 

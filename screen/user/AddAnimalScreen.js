@@ -24,6 +24,7 @@ const AddAnimalScreen = (props) => {
   const [selectedImage, setSelectedImage] = useState();
   const [selectedLocation, setSelectedLocation] = useState();
   const [pickedImage, setPickedImage] = useState();
+  const [clickedSubmit, setClickedSubmit] = useState();
 
   const dispatch = useDispatch();
 
@@ -58,6 +59,7 @@ const AddAnimalScreen = (props) => {
     setPickedImage(undefined);
     setSelectedLocation(undefined);
     props.navigation.goBack();
+    setClickedSubmit(true);
   };
 
   const onSwipeRight = (state) => {
@@ -112,13 +114,14 @@ const AddAnimalScreen = (props) => {
               <LocationPicker
                 navigation={props.navigation}
                 onLocationPicked={locationPickHandler}
+                clickedSubmit={clickedSubmit}
               />
             </View>
             {selectedLocation && (
               <View style={styles.buttonContainer}>
                 <Button
                   title="Add Animal"
-                  color={"#f8f4e3"}
+                  color={"#4682b4"}
                   onPress={saveAnimalHandler}
                 />
               </View>
@@ -140,10 +143,12 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    paddingVertical:50,
+    //paddingVertical:50,
+    paddingTop:50,
     paddingHorizontal:25,
     borderBottomRightRadius:50,
     borderBottomLeftRadius:50,
+    height:"100%",
   },
   textInput: {
     marginBottom: 10,
@@ -160,13 +165,13 @@ const styles = StyleSheet.create({
     borderBottomColor: "#95d8eb",
   },
   buttonContainer: {
+    backgroundColor:"#f8f4e3",
+    width:"50%",
+    height:"12%",
+    marginTop:5,
     paddingHorizontal: 10,
-    borderTopRightRadius: 100,
-    borderBottomLeftRadius: 100,
-    borderColor: "transparent",
-    borderBottomColor: "#f8f4e3",
-    borderTopColor: "#f8f4e3",
-    borderWidth: 5,
+    borderTopRightRadius:10,
+    borderTopLeftRadius:10,
   },
 });
 
