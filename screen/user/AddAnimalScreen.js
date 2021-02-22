@@ -85,7 +85,6 @@ const AddAnimalScreen = (props) => {
                   value={dogTypeValue}
                   placeholder="Provide Breed"
                   maxLength={20}
-                  placeholderTextColor="#a63a50"
                 />
               </View>
             </View>
@@ -106,7 +105,7 @@ const AddAnimalScreen = (props) => {
                 multiline
                 maxLength={150}
                 placeholder="Provide Description"
-                placeholderTextColor="#a63a50"
+                maxHeight={110}
                 returnKeyType="done"
                 blurOnSubmit
               />
@@ -134,33 +133,31 @@ const AddAnimalScreen = (props) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: "#a63a50",
     backgroundColor: "#95d8eb",
   },
   container: {
+    backgroundColor:"#4682b4",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    margin: 50,
+    paddingVertical:50,
+    paddingHorizontal:25,
+    borderBottomRightRadius:50,
+    borderBottomLeftRadius:50,
   },
   textInput: {
-    backgroundColor: "#f8f4e3",
     marginBottom: 10,
-    paddingVertical: 10,
-    color: "#CE96A6",
+    paddingBottom: 5,
+    marginHorizontal:20,
+    textAlign:"center",
+    color: "#f8f4e3",
     paddingHorizontal: 25,
-    textAlign: "center",
     fontSize: 20,
 
     borderColor: "transparent",
-    borderWidth: 10,
-    borderLeftColor: "#a63a50",
-    borderRightColor: "#a63a50",
-    borderBottomEndRadius: 50,
-    borderTopEndRadius: 50,
-    borderBottomStartRadius: 50,
-    borderTopStartRadius: 50,
-    // borderBottomWidth: 1,
+    borderWidth: 5,
+    borderBottomColor: "#0fabd2",
+    borderBottomColor: "#95d8eb",
   },
   buttonContainer: {
     paddingHorizontal: 10,
