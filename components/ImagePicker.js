@@ -61,11 +61,9 @@ const ImgPicker = (props) => {
     <View style={styles.imagePicker}>
       <View
         style={{
-          borderColor: "#f8f4e3",
-          // borderTopColor: "#a63a50",
-          borderWidth: 5,
-          borderRadius: 20,
-          padding: 5,
+          borderColor:"transparent",
+          borderRadius: 5,
+          padding: 10,
           backgroundColor: "#f8f4e3",
         }}
       >
@@ -94,26 +92,17 @@ const styles = StyleSheet.create({
   imagePreview: {
     width: 150,
     height: 200,
-    // marginBottom: 10,
     justifyContent: "center",
     alignItems: "center",
     overflow: "hidden",
-    // borderColor: "transparent",
-    // borderBottomColor: "#ccc",
-    // borderRightColor: "#ccc",
-    // borderWidth: 4,
-    // borderBottomEndRadius: 10,
-    // borderBottomStartRadius: 10,
-    // borderBottomStartRadius: 10,
-    // borderTopEndRadius: 40,
-    // backgroundColor: "purple",
-    borderColor: "#a63a50",
-    borderTopColor: "#a63a50",
-    borderWidth: 5,
-    borderRadius: 20,
+    borderColor: "transparent",
+    //borderColor: "#4682b4",
+    borderWidth: 10,
+    borderRadius: 5,
+    borderBottomColor: "#95d8eb",
   },
   imagePreviewText: {
-    color: "#a63a50",
+    color: "#4682b4",
     fontSize: 20,
   },
   image: {
