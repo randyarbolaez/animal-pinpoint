@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { FlatList, View, Text, StyleSheet, Button } from "react-native";
+import { FlatList, View, Text, StyleSheet, Button, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
@@ -9,6 +9,7 @@ import CardAnimal from "../../components/CardAnimal";
 const AllAnimalsScreen = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [isAllPostBtnPressed, setIsAllPostBtnPressed] = useState(true);
 
   const availableAnimals = useSelector(
     (state) => state.animal.availableAnimals
@@ -56,23 +57,47 @@ const AllAnimalsScreen = (props) => {
 
   return (
     <View style={styles.screen}>
-      <FlatList
-        onRefresh={loadAnimals}
-        refreshing={isRefreshing}
-        data={availableAnimals}
-        numColumns={1}
-        keyExtractor={(item) => item.id}
-        renderItem={(itemData) => {
-          return (
-            <CardAnimal
-              onSelect={() => {
-                selectItemHandler(itemData.item.id);
-              }}
-              {...itemData.item}
-            />
-          );
-        }}
-      />
+      <View style={styles.buttonView}>
+        <TouchableOpacity style={{...styles.button}} onPress={() => setIsAllPostBtnPressed(true)}>
+          <Text style={{
+            ...styles.button,
+              color:isAllPostBtnPressed ? "#4682b4" : "#f8f4e3",
+            }}>
+          All Posts
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity 
+          onPress={() => setIsAllPostBtnPressed(false)}>
+          <Text style={{
+            ...styles.button,
+            color:!isAllPostBtnPressed ? "#4682b4" : "#f8f4e3",
+            }}>
+          Your Posts
+          </Text>
+        </TouchableOpacity>
+      </View>
+      {isAllPostBtnPressed ? (
+        <FlatList
+          onRefresh={loadAnimals}
+          refreshing={isRefreshing}
+          data={availableAnimals}
+          numColumns={1}
+          keyExtractor={(item) => item.id}
+          renderItem={(itemData) => {
+            return (
+              <CardAnimal
+                onSelect={() => {
+                  selectItemHandler(itemData.item.id);
+                }}
+                {...itemData.item}
+              />
+            );
+          }}
+        />
+      ):(
+        <Text>Your Posts</Text>
+      )
+      }
     </View>
   );
 };
@@ -83,6 +108,16 @@ const styles = StyleSheet.create({
     paddingTop: 50, 
     //backgroundColor: "#a63a50",
     backgroundColor: "#95d8eb",
+  },
+  buttonView:{
+    display:"flex",
+    flexDirection:"row",
+    justifyContent:"space-around",
+    marginHorizontal:"25%",
+  },
+  button:{
+    fontSize:18,
+    fontWeight:"bold",
   },
 });
 
