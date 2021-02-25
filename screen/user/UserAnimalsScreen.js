@@ -10,14 +10,6 @@ const UserAnimalsScreen = (props) => {
   const userAnimals = useSelector((state) => state.animal.userAnimals);
   const dispatch = useDispatch();
 
-  const loadAnimals = useCallback(async () => {
-    try {
-      await dispatch(animalActions.fetchAnimals());
-    } catch (err) {
-      console.log(err.message);
-    }
-  }, [dispatch]);
-
   const deleteHandler = (id) => {
     Alert.alert("Are you Sure?", "Do you really want to delete this item?", [
       {
@@ -45,7 +37,6 @@ const UserAnimalsScreen = (props) => {
     <FlatList
       data={userAnimals}
       keyExtractor={(item) => item.id}
-      numColumns={2}
       renderItem={(itemData) => {
         return (
           <CardAnimal

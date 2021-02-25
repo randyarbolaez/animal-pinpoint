@@ -5,8 +5,10 @@ import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 import * as animalActions from "../../store/actions/animals-actions";
 import CardAnimal from "../../components/CardAnimal";
+import UserAnimalsScreen from '../user/UserAnimalsScreen';
 
 const AllAnimalsScreen = (props) => {
+  const userAnimals = useSelector((state) => state.animal.userAnimals);
   const [isLoading, setIsLoading] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isAllPostBtnPressed, setIsAllPostBtnPressed] = useState(true);
@@ -94,8 +96,10 @@ const AllAnimalsScreen = (props) => {
             );
           }}
         />
+      ):userAnimals.length ? (
+        <UserAnimalsScreen/>
       ):(
-        <Text>Your Posts</Text>
+        <Text style={{alignSelf:'center',fontSize:32}}>You have no posts</Text>
       )
       }
     </View>
