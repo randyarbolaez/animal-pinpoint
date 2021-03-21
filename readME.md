@@ -6,4 +6,4 @@
 
 ## Gif of Application
 
-![Alt Text](./gif/animalPinPoint.gif)
+![Alt Text](./assets/gif/animalPinPoint.gif)
