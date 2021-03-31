@@ -10,8 +10,6 @@ import {
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 
-import Colors from "../constants/Colors";
-
 const LocationPicker = (props) => {
   const [pickedLocation, setPickedLocation] = useState();
   const [clickedButton, setClickedButton] = useState(false);
@@ -21,14 +19,14 @@ const LocationPicker = (props) => {
   const { onLocationPicked } = props;
 
   useEffect(() => {
-    if(props.clickedSubmit){
+    if (props.clickedSubmit) {
       setClickedButton(false);
       setPickedLocation(false);
     }
     if (mapPickedLocation) {
       onLocationPicked(mapPickedLocation);
     }
-  }, [props.clickedSubmit,mapPickedLocation, onLocationPicked]);
+  }, [props.clickedSubmit, mapPickedLocation, onLocationPicked]);
 
   const verifyPermissions = async () => {
     const result = await Permissions.askAsync(Permissions.LOCATION);
@@ -45,7 +43,7 @@ const LocationPicker = (props) => {
   };
 
   const getLocationHandler = async () => {
-    setClickedButton(true)
+    setClickedButton(true);
     const hasPermission = await verifyPermissions();
 
     if (!hasPermission) {
@@ -81,11 +79,9 @@ const LocationPicker = (props) => {
             color={"#f8f4e3"}
             onPress={getLocationHandler}
           />
-        ):pickedLocation ? null:(
+        ) : pickedLocation ? null : (
           <ActivityIndicator size="large" />
-        )
-        }
-        
+        )}
       </View>
     </View>
   );

@@ -22,9 +22,6 @@ const AnimalInformation = ({ animalInfo: animal }) => {
             borderRadius: 10,
             width: "100%",
             height: "100%",
-            // margin: 10,
-            // padding: 10,
-            // borderWidth: userId == props.ownerId ? 2 : 0,
           }}
           source={{
             uri: animal.imageURL,
@@ -61,7 +58,7 @@ const styles = StyleSheet.create({
   animalImage: {
     alignSelf: "center",
     borderWidth: 5,
-    borderColor:'transparent',
+    borderColor: "transparent",
     borderBottomColor: "#f8f4e3",
     width: "50%",
     height: 120,
@@ -83,7 +80,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f8f4e3",
     padding: 5,
     color: "#a63a50",
-    color:"#23395d",
+    color: "#23395d",
     width: "100%",
     alignSelf: "center",
   },

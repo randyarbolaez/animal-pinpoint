@@ -61,7 +61,7 @@ const ImgPicker = (props) => {
     <View style={styles.imagePicker}>
       <View
         style={{
-          borderColor:"transparent",
+          borderColor: "transparent",
           borderRadius: 5,
           padding: 10,
           backgroundColor: "#f8f4e3",
@@ -96,7 +96,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     overflow: "hidden",
     borderColor: "transparent",
-    //borderColor: "#4682b4",
     borderWidth: 10,
     borderRadius: 5,
     borderBottomColor: "#95d8eb",

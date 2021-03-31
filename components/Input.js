@@ -65,13 +65,21 @@ const Input = (props) => {
     dispatch({ type: INPUT_BLUR });
   };
   return (
-    <View styles={{...styles.formControl,backgroundColor: props.errorText == true ? 'purple':'red' }}>
+    <View
+      styles={{
+        ...styles.formControl,
+        backgroundColor: props.errorText == true ? "purple" : "red",
+      }}
+    >
       <Text style={styles.label}>{props.label}</Text>
       <TextInput
         {...props}
-        style={{...styles.input, 
-            borderBottomColor: !inputState.isValid && inputState.touched ? 'rgba(158, 19, 24,1)':'#4682b4',
-            //borderBottomColor: !inputState.isValid && inputState.touched ? 'rgba(158, 19, 24,1)':'#00008b',
+        style={{
+          ...styles.input,
+          borderBottomColor:
+            !inputState.isValid && inputState.touched
+              ? "rgba(158, 19, 24,1)"
+              : "#4682b4",
         }}
         value={inputState.value}
         onChangeText={textChangeHandler}
@@ -86,14 +94,14 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   input: {
-    marginHorizontal:"3%",
+    marginHorizontal: "3%",
     paddingHorizontal: 8,
     paddingVertical: 10,
     borderColor: "transparent",
     borderWidth: 5,
     fontSize: 20,
     textAlign: "center",
-    color:'#f8f4e3',
+    color: "#f8f4e3",
   },
 });
 
