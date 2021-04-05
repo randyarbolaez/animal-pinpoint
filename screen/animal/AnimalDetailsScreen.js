@@ -4,10 +4,10 @@ import { useSelector } from "react-redux";
 
 import Colors from "../../constants/Colors";
 
-const AnimalDetailsScreen = props => {
+const AnimalDetailsScreen = (props) => {
   const animalId = props.navigation.getParam("animalId");
-  const animal = useSelector(state =>
-    state.animal.availableAnimals.find(animal => animal.id === animalId)
+  const animal = useSelector((state) =>
+    state.animal.availableAnimals.find((animal) => animal.id === animalId)
   );
 
   return (
@@ -19,17 +19,17 @@ const AnimalDetailsScreen = props => {
           height: "35%",
           borderRadius: 10,
           shadowOpacity: 0.26,
-          shadowOffset: { width: 0, height: 2 }
+          shadowOffset: { width: 0, height: 2 },
         }}
         source={{
-          uri: animal.imageURL
+          uri: animal.imageURL,
         }}
       />
       <View style={styles.addressContainer}>
         <Text
           style={{
-            color: Colors.accentColor,
-            fontSize: 15
+            color: "#ffdfba",
+            fontSize: 15,
           }}
         >
           {animal.address}
@@ -40,7 +40,7 @@ const AnimalDetailsScreen = props => {
           <Text
             style={{
               fontSize: 16,
-              color: "#fff"
+              color: "#fff",
             }}
           >
             {animal.description}
@@ -56,12 +56,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: Colors.accentColor
+    backgroundColor: "#ffdfba",
   },
   dogType: {
     marginBottom: 30,
     fontSize: 24,
-    color: "#ccc"
+    color: "#ccc",
   },
   descriptionContainer: {
     display: "flex",
@@ -69,12 +69,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     // marginTop: 30,
     marginHorizontal: 55,
-    backgroundColor: Colors.primaryColor,
+    backgroundColor: "#ec5766",
     height: "15%",
     borderRadius: 10,
     shadowOpacity: 0.26,
     shadowOffset: { width: 0, height: 2 },
-    paddingHorizontal: 25
+    paddingHorizontal: 25,
   },
   addressContainer: {
     marginVertical: 15,
@@ -82,8 +82,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#ccc",
     borderRadius: 10,
     shadowOpacity: 0.26,
-    shadowOffset: { width: 0, height: 2 }
-  }
+    shadowOffset: { width: 0, height: 2 },
+  },
 });
 
 export default AnimalDetailsScreen;

@@ -84,14 +84,12 @@ const AnimalNavigator = createBottomTabNavigator(
         height: 40,
         paddingTop: 10,
         backgroundColor: "#95d8eb",
-        borderTopWidth:0
+        borderTopWidth: 0,
       },
       activeTintColor: Platform.OS === "android" ? "white" : "#4682b4",
-      activeBackgroundColor:
-        Platform.OS === "android" ? Colors.primaryColor : "",
+      activeBackgroundColor: Platform.OS === "android" ? "#ec5766" : "",
       showLabel: false,
-      inactiveTintColor:
-        Platform.OS === "android" ? Colors.primaryColor : "#f8f4e3",
+      inactiveTintColor: Platform.OS === "android" ? "#ec5766" : "#f8f4e3",
     },
   }
 );

@@ -5,12 +5,12 @@ import { Ionicons } from "@expo/vector-icons";
 
 import Colors from "../constants/Colors";
 
-const CustomHeaderButton = props => (
+const CustomHeaderButton = (props) => (
   <HeaderButton
     {...props}
     IconComponent={Ionicons}
     iconSize={25}
-    color={Platform.OS === "android" ? "white" : Colors.accentColor}
+    color={Platform.OS === "android" ? "white" : "#ffdfba"}
   />
 );
 
